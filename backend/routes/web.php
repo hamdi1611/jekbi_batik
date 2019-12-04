@@ -16,6 +16,9 @@ Route::get('/', function () {
 });
 
 Route::get('/api/{id}', function ($id) {
-    return $id+1;
+    $temp = new \stdClass();
+    $temp->id = (int) $id;
+    return response()->json($temp);
 });
 
+Route::get('/test/{id}', 'TestController@index');
