@@ -21,4 +21,6 @@ Route::get('/api/{id}', function ($id) {
     return response()->json($temp);
 });
 
+Route::post('/api', 'TestController@cobaPost');
+
 Route::get('/test/{id}', 'TestController@index');

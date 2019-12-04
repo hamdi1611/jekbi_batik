@@ -17,6 +17,12 @@ class TestController extends Controller
         return Test::find($id);
     }
 
+    public function cobaPost(Request $request) {
+        $data = $request->all();
+        
+        return response()->json($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
