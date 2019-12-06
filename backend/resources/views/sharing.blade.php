@@ -20,27 +20,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <!-- untuk hiasan -->
-    <style type="text/css">
-        table { 
-            width: 100%; 
-            border-collapse: collapse; 
-        }
-
-        tr:nth-of-type(odd) { 
-            background: #eee; 
-        }
-        th { 
-            background: #333; 
-            color: white; 
-            font-weight: bold; 
-        }
-        td, th { 
-            padding: 6px; 
-            border: 1px solid #ccc; 
-            text-align: left; 
-        }
-    </style>
 
   <!-- Custom styles for this template -->
   <link href="assets/css/sidebar.css" rel="stylesheet">
@@ -51,21 +30,23 @@
 
 <body>
 
-  <?php include('navbar.php') ?>
+@include('navbar')
 
 <div class="wrapper">
-    <?php include('sidebar.php') ?>
+    @include('sidebar')
 
     <div class="container-fluid">
-        <div class="tulis_dashboard"><h3>Management Aset</h3></div>
-        <div class="row col-md-12">
-            <div class="col-md-3">
-                <div class="tulis_listbarang"><h5><a href="management.php">Input Data</a></h5></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="tulis_dashboard"><h3>Sharing Aset</h3></div>
             </div>
-            <div class="col-md-3">
-                <div class="tulis_listbarang"><h5><a href="management_history.php">Data Aset/Barang</a></h5></div>
+            <div class="col-md-6">
+                <!-- Search form -->
+                <div class="md-form mt-2">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </div>
             </div>
-        </div>
+        </div><hr>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-primary">
@@ -74,42 +55,27 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Barang</th>
+                                <th>Foto</th>
                                 <th>Jumlah</th>
-                                <th>Tanggal Pembelian</th>
-                                <th>Tanggal Kadaluarsa</th>
+                                <th>Lokasi</th>
                                 <th>Status</th>
-                                <th>Kebijakan</th>
+                                <th>Harga</th>
+                                <th>Pinjam</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($barangs as $key => $barang)
                             <tr>
-                                <td>1</td>
-                                <td>Kilgore</td>
-                                <td>Trout</td>
-                                <td>kilgore</td>
-                                <td>kilgore</td>
+                                <td>{{ $key+1 }}</td>
+                                <td>{{ $barang['nama'] }}</td>
+                                <td><img src="assets/images/{{ $barang['image'] }}" height="30" width="30"></td>
+                                <td>{{ $barang['jumlah'] }}</td>
+                                <td>{{ $barang['lokasi'] }}</td>
+                                <td>{{ $barang['status'] }}</td>
+                                <td>{{ $barang['harga'] }}</td>
+                                <td><button type="button" class=" btn-info btn btn-sm" onclick="location.href='../pinjam'">Pinjam</button></th>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Bob</td>
-                                <td>Loblaw</td>
-                                <td>boblahblah</td>
-                                <td>kilgore</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Holden</td>
-                                <td>Caulfield</td>
-                                <td>penceyreject</td>
-                                <td>kilgore</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Holden</td>
-                                <td>Caulfield</td>
-                                <td>penceyreject</td>
-                                <td>kilgore</td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

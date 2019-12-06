@@ -30,12 +30,13 @@
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="list-group list-group-flush">
-        <a href="dashboard.php" class="list-group-item list-group-item-action bg-light">Dashboard</a>
-        <a href="air.php" class="list-group-item list-group-item-action bg-light" >Pengolahan Air</a>
-        <a href="energi.php" class="list-group-item list-group-item-action bg-light">Pengolahan Energi</a>
-        <a href="sampah.php" class="list-group-item list-group-item-action bg-light">Pengolahan Sampah</a>
-        <a href="management.php" class="list-group-item list-group-item-action bg-light">Management Aset</a>
-        <a href="sharing.php" class="list-group-item list-group-item-action bg-light">Sharing Aset</a>
+        <a href="/dashboard" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+        <a href="/air" class="list-group-item list-group-item-action bg-light" >Pengolahan Air</a>
+        <a href="/energi" class="list-group-item list-group-item-action bg-light">Pengolahan Energi</a>
+        <a href="/sampah" class="list-group-item list-group-item-action bg-light">Pengolahan Sampah</a>
+        <a href="/management" class="list-group-item list-group-item-action bg-light">Management Aset</a>
+        <a href="/sharing" class="list-group-item list-group-item-action bg-light">Sharing Aset</a>
+        <a href="/konsultasi" class="list-group-item list-group-item-action bg-light">Layanan Konsultasi</a>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->

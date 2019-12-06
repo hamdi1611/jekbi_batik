@@ -23,45 +23,44 @@
 
   <!-- Custom styles for this template -->
   <link href="assets/css/sidebar.css" rel="stylesheet">
+  <link href="assets/css/air_history.css" rel="stylesheet">
 
 </head>
 
 <body>
 
-  <?php include('navbar.php') ?>
+  @include('navbar')
 
 <div class="wrapper">
-    <?php include('sidebar.php') ?>
+    @include('sidebar')
 
     <div class="container-fluid">
-        <div class="tulis_dashboard"><h3>Pengelolaan Sampah</h3></div>
-        <div class="row col-md-12">
-            <div class="col-md-3">
-                <div class="tulis_listbarang"><h5><a href="sampah.php">Input Data Pengeluaran Sampah</a></h5></div>
+        <div class="tulis_dashboard"><h3>Pengelolaan Air</h3></div>
+        <hr>
+        <button type="button" class=" btn-info btn btn-sm" onclick="location.href='/air'">Input Data</button>
+        <button type="button" class="btn btn-info btn-sm" onclick="location.href='/air_history'">History</button>
+        <!-- Default form contact -->
+        <form class="text-left border border-light p-5" action="../add/air" method="POST">
+            <!-- Name -->
+            <div class="col-md-12">
+                <label>Kegiatan</label>
+                <select name="kegiatan" class="browser-default custom-select mb-4">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="Wudhu" selected>Wudhu</option>
+                    <option value="Mandi">Mandi</option>
+                    <option value="Cuci Peralatan">Cuci Peralatan</option>
+                    <option value="Lainnya">Lainnya</option>
+                </select>
+                <label>Tanggal</label>
+                <input type="date" name="date" id="defaultContactFormDate" class="form-control mb-4">
+
+                <label>Jumlah Penggunaan</label>
+                <input type="number" name="jumlah" id="defaultContactFormNumber" class="form-control mb-4" placeholder="Jumlah dalam satuan Liter">
+                
+                <!-- Send button -->
+                <button class="btn btn-info btn-block" type="submit">Submit</button>
             </div>
-            <div class="col-md-3">
-                <div class="tulis_listbarang"><h5><a href="sampah_history.php">History</a></h5></div>
-            </div>
-        </div>
-        <div class="container py-1">
-        <form method="POST" action="index.php">
-            <label for="kegiatan">Kegiatan</label>
-            <select name="kegiatan" required>
-                <option value="" disabled selected>Choose your option</option>
-                <option value="1">Buka Puasa(Takjil)</option>
-                <option value="2">Buka Puasa(Makan Besar)</option>
-                <option value="3">Buka Puasa(Minuman)</option>
-            </select>
-            <br>
-            <label for="jumlah">Jumlah Pengguna</label>
-            <input type="number" name="jumlah" value="number">
-            <br>
-            <label for="total">Total Keperluan</label>
-            <input type="number" disabled name="total" value="total">
-            <br>
-            <input type="submit" value="Submit">
         </form>
-        </div>
     </div>
 
 </div>

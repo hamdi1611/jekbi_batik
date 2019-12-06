@@ -14,50 +14,103 @@ class AirListrikController extends Controller
         return 0;
     }
 
-    public function air() {
-        $response = new \stdClass();
+    public function air_history() {
+        $airs = Air::orderBy('id_air', 'DESC')->limit(10)->get()->toArray();
+        
+        return view('air_history', ['airs' => $airs]);
+        // $response = new \stdClass();
 
-        $current = Air::select('tanggal', DB::raw('SUM(penggunaan) as total'))->groupBy('tanggal')->orderBy('id_air', 'DESC')->get();
+        // $current = Air::select('tanggal', DB::raw('SUM(penggunaan) as total'))->groupBy('tanggal')->orderBy('id_air', 'DESC')->get();
 
-        $response->penggunaan = $current[0]['total'];
-        $response->history = Air::orderBy('id_air', 'DESC')->limit(3)->get();
-        $response->akumulasi = $current;
+        // $response->penggunaan = $current[0]['total'];
+        // $response->history = Air::orderBy('id_air', 'DESC')->limit(3)->get();
+        // $response->akumulasi = $current;
 
-        return response()->json($response);
+        // return response()->json($response);
     }
 
-    public function listrik() {
-        $response = new \stdClass();
-
-        $current = Listrik::select('tanggal', DB::raw('SUM(penggunaan) as total'))->groupBy('tanggal')->orderBy('id_listrik', 'DESC')->limit(1)->get();
-
-        $response->penggunaan = $current[0]['total'];
-        $response->history = Listrik::orderBy('id_listrik', 'DESC')->limit(3)->get();
-        $response->akumulasi = $current;
-
-        return response()->json($response);
+    public function listrik_history() {
+        $listriks = Listrik::orderBy('id_listrik', 'DESC')->limit(10)->get()->toArray();
+        
+        return view('energi_history', ['listriks' => $listriks]);
     }
 
     public function add_air(Request $request) {
         $data = $request->all();
 
-        $tanggal = date('Y-m-d');
+        $tanggal = $data['date'];
         $kegiatan = $data['kegiatan'];
+        $jumlah = $data['jumlah'];
+        
+        if ($kegiatan == 'Wudhu') {
+            $total = 1.8 * $jumlah;
+        }
+        elseif ($kegiatan == 'Mandi') {
+            $total = 10 * $jumlah;
+        }
+        elseif ($kegiatan == 'Cuci Peralatan') {
+            $total = 8 * $jumlah;
+        }
+        elseif ($kegiatan == 'Lainnya') {
+            $total = 20 * $jumlah;
+        }
 
-        return [$kegiatan, $tanggal];
+        Air::insert([
+            'kegiatan' => $kegiatan,
+            'tanggal' => $tanggal,
+            'jumlah' => $jumlah,
+            'penggunaan' => $total
+        ]);
+
+        return redirect('air_history');
     }
 
     public function add_listrik(Request $request) {
         $data = $request->all();
 
-        $tanggal = date('Y-m-d');
-        $kegiatan = $data['kegiatan'];
+        $tanggal = $data['date'];
+        $alat = $data['alat'];
+        $jumlah = $data['jumlah'];
+        $lama_pakai = $data['lama_pakai'];
 
-        // if (blablabla) {
-        //     $this->sendNotification($kegiatan)
-        // }
+        if ($alat == 'Lampu Kecil') {
+            $total = 0.06 * $lama_pakai * $jumlah;
+        }
+        elseif ($alat == 'Lampu Besar') {
+            $total = 0.12 * $lama_pakai * $jumlah;
+        }
+        elseif ($alat == 'Kipas Angin') {
+            $total = 0.24 * $lama_pakai * $jumlah;
+        }
+        elseif ($alat == 'AC') {
+            $total = 1 * $lama_pakai * $jumlah;
+        }
+        elseif ($alat == 'Sound System') {
+            $total = 2 * $lama_pakai * $jumlah;
+        }
 
-        return $kegiatan;
+        Listrik::insert([
+            'tanggal' => $tanggal,
+            'alat' => $alat,
+            'jumlah' => $jumlah,
+            'lama_pakai' => $lama_pakai,
+            'penggunaan' => $total
+        ]);
+
+        $sum_listrik = Listrik::where('tanggal', $tanggal)->select('tanggal', DB::raw('SUM(penggunaan) as total'))->groupBy('tanggal')->get()[0]['total'];
+        if ($sum_listrik > 10) {
+            $content = "Penggunaan listrik melebihi limit normal";
+            $this->sendNotification($content);
+        }
+
+        return redirect('energi_history');
+    }
+
+    public function pinjam() {
+        $content = "Pinjaman Anda sedang diproses";
+        $this->sendNotification($content);
+
+        return redirect('dashboard');
     }
 
     public static function sendNotification($content) {
@@ -70,7 +123,7 @@ class AirListrikController extends Controller
 
         $headers = array();
         $headers[] = 'Accept: application/x-www-form-urlencoded';
-        $headers[] = 'X-Api-Key: g5ITMRLwYC4or9c2ZJ1Mt7D211O4FOY3';
+        $headers[] = 'X-Api-Key: MvktdBiBjTQo0YH9JiCrqmCuSYy2wf6m';
         $headers[] = 'Content-Type: application/x-www-form-urlencoded';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 

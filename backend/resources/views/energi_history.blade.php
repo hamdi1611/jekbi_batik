@@ -51,21 +51,16 @@
 
 <body>
 
-  <?php include('navbar.php') ?>
+  @include('navbar')
 
 <div class="wrapper">
-    <?php include('sidebar.php') ?>
+    @include('sidebar')
 
     <div class="container-fluid">
-        <div class="tulis_dashboard"><h3>Pengolahan Energi</h3></div>
-        <div class="row col-md-12">
-            <div class="col-md-3">
-                <div class="tulis_listbarang"><h5><a href="energi.php">Input Data Penggunaan Listrik</a></h5></div>
-            </div>
-            <div class="col-md-3">
-                <div class="tulis_listbarang"><h5><a href="energi_history.php">History</a></h5></div>
-            </div>
-        </div>
+        <div class="tulis_dashboard"><h3>Pengelolaan Energi</h3></div>
+        <hr>
+        <button type="button" class=" btn-info btn btn-sm" onclick="location.href='/energi'">Input Data</button>
+        <button type="button" class="btn btn-info btn-sm" onclick="location.href='/energi_history'">History</button>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-primary">
@@ -75,39 +70,22 @@
                                 <th>No</th>
                                 <th>Alat</th>
                                 <th>Tanggal</th>
+                                <th>Jumlah Unit</th>
                                 <th>Lama Penggunaan</th>
                                 <th>Total Penggunaan</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($listriks as $key => $listrik)
                             <tr>
-                                <td>1</td>
-                                <td>Kilgore</td>
-                                <td>Trout</td>
-                                <td>kilgore</td>
-                                <td>kilgore</td>
+                                <td>{{ $key+1 }}</td>
+                                <td>{{ $listrik['alat'] }}</td>
+                                <td>{{ $listrik['tanggal'] }}</td>
+                                <td>{{ $listrik['jumlah'] }}</td>
+                                <td>{{ $listrik['lama_pakai'] }}</td>
+                                <td>{{ $listrik['penggunaan'] }}</td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Bob</td>
-                                <td>Loblaw</td>
-                                <td>boblahblah</td>
-                                <td>kilgore</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Holden</td>
-                                <td>Caulfield</td>
-                                <td>penceyreject</td>
-                                <td>kilgore</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Holden</td>
-                                <td>Caulfield</td>
-                                <td>penceyreject</td>
-                                <td>kilgore</td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

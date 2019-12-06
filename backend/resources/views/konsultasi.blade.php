@@ -23,46 +23,36 @@
 
   <!-- Custom styles for this template -->
   <link href="assets/css/sidebar.css" rel="stylesheet">
+  <link href="assets/css/air_history.css" rel="stylesheet">
 
 </head>
 
 <body>
 
-  <?php include('navbar.php') ?>
+@include('navbar')
 
 <div class="wrapper">
-    <?php include('sidebar.php') ?>
+    @include('sidebar')
 
     <div class="container-fluid">
-        <div class="tulis_dashboard"><h3>Pengolahan Air</h3></div>
-        <div class="row col-md-12">
-            <div class="col-md-3">
-                <div class="tulis_listbarang"><h5><a href="air.php">Input Data Penggunaan Air</a></h5></div>
-            </div>
-            <div class="col-md-3">
-                <div class="tulis_listbarang"><h5><a href="air_history.php">History</a></h5></div>
-            </div>
-        </div>
-        <div class="container py-1">
-        <form method="POST" action="index.php">
-            <label for="kegiatan">Kegiatan</label>
-            <select name="kegiatan" required>
-                <option value="" disabled selected>Choose your option</option>
-                <option value="1">Wudhu</option>
-                <option value="2">Mandi</option>
-                <option value="3">Cuci Perlengkapan</option>
-                <option value="4">Siram Tanaman</option>
-            </select>
-            <br>
-            <label for="jumlah">Jumlah Pemakaian</label>
-            <input type="number" name="jumlah" value="number">
-            <br>
-            <label for="total">Total Penggunaan</label>
-            <input type="number" disabled name="total" value="total">
-            <br>
-            <input type="submit" value="Submit">
-        </form> 
-        </div>
+        <div class="tulis_dashboard"><h3>Layanan Konsultasi</h3></div>
+        <hr>
+        <p>Layanan konsultasi adalah layanan berupa tanya-jawab dalam rangka penanganan masalah sehari-hari<br>
+        yang berkaitan dengan lingkungan dalam masjid. Konsultasi meliputi:<br>
+        <ul> 
+            <li>Penanganan Sampah yang ada pada masjid</li>
+            <li>Penanganan sumber daya air dan pemanfaatannya</li>
+            <li>Penangan sumber daya listrik dan pengelolaannya berdsasarkan data</li>
+            <li>konsultasi pembangunan dan perluasan masjid</li>
+            <li>lainnya</li>
+        </ul>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <h6> Contact Person : Nuha Adinata - 0834434343547 </h6>
+
     </div>
 
 </div>

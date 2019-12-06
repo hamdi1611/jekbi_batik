@@ -5,11 +5,9 @@
  */
  body {
     overflow-x: hidden;
-    overflow-y: hidden;
   }
 
   .wrapper {
-    display: flex;
     align-items: stretch;
 }
   
@@ -50,7 +48,6 @@
 }
 
 .tulis_dashboard ,h3{
-  margin-left: 10px;
   margin-top: 10px;
 }
 
